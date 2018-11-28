@@ -47,9 +47,10 @@ $js = 'e='.GetRegexValue($jsFunc, '/,(.=\[("[\w=]+","[\w=]+".*?")\].*),\w=crypto
 preg_match('|CryptoJS.*?,.*?\((\w+)\),.*?iv:.*?\((\w+)\)|', $jsFunc, $matchesJs);
 $js .= 'process.stdout.write('.$matchesJs[1].');process.stdout.write(" ");process.stdout.write('.$matchesJs[2].');';
 
-if (file_put_contents('FuckMoonwalk.js', $js)) {
+$file = '/mnt/c/tmp/FuckMoonwalk.js';
+if (file_put_contents($file, $js)) {
 
-	$keys = explode(' ',shell_exec('node FuckMoonwalk.js'));
+	$keys = explode(' ',shell_exec('node '.$file));
 
 	$key = $keys[0];
 	$iv = $keys[1];
